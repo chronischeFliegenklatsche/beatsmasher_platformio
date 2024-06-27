@@ -65,7 +65,6 @@ GameRuntime::GameRuntime() : smash::Runtime() {
     {
         smash::Rendering::setRenderingAPI(renderingAPI);
     }
-
 }
 
 void GameRuntime::pipe() const {
