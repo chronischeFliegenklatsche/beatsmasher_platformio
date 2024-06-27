@@ -59,7 +59,14 @@
 			"stdexcept": "cpp",
 			"streambuf": "cpp",
 			"cinttypes": "cpp",
-			"typeinfo": "cpp"
+			"typeinfo": "cpp",
+			"charconv": "cpp",
+			"variant": "cpp",
+			"bit": "cpp",
+			"compare": "cpp",
+			"concepts": "cpp",
+			"netfwd": "cpp",
+			"numbers": "cpp"
 		}
 	}
 }

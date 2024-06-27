@@ -16,16 +16,18 @@
 
 
 #include <GameRuntime.hpp>
+#include "Scenes/SampleScene.cpp"
 
 GameRuntime::GameRuntime() : smash::Runtime() {
     // Set up game data and scene management
-    std::shared_ptr<smash::Scene> mainScene = nullptr; // replace nullptr with initial scene
+    std::shared_ptr<smash::Scene> mainScene = std::make_shared<SampleScene>(); // replace nullptr with initial scene
+    
     if (mainScene)
     {
         smash::SceneManagement::addScene(mainScene);
         smash::SceneManagement::setActiveScene(mainScene);
     }
-
+    
     // Set up input API
     std::shared_ptr<smash::InputAPI> inputAPI;
 #ifdef ARDUINO
@@ -63,6 +65,7 @@ GameRuntime::GameRuntime() : smash::Runtime() {
     {
         smash::Rendering::setRenderingAPI(renderingAPI);
     }
+
 }
 
 void GameRuntime::pipe() const {
