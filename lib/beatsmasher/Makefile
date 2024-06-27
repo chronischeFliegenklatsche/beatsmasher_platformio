@@ -3,7 +3,7 @@ CC = gcc
 CXX = g++
 
 # Smash
-SMASH = C:/smash
+SMASH = ../smash
 SMASH_INCLUDE_DIR := $(SMASH)/include
 SMASH_DEP_DIR := $(SMASH)/depends
 SMASH_DEP_STATIC_DIR := $(SMASH_DEP_DIR)/static
@@ -28,7 +28,7 @@ update_smash:
 .PHONY: update_smash
 
 # Compiler flags
-CFLAGS := -Wall -Iinclude -I$(SMASH_INCLUDE_DIR)
+CFLAGS := -Wall -Iinclude -I$(SMASH_INCLUDE_DIR) -Isrc
 CXXFLAGS := $(CFLAGS)
 LDFLAGS = -lopengl32 -lgdi32
 
