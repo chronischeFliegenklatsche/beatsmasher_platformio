@@ -9,7 +9,7 @@ class SampleScene : public smash::Scene {
 
     public:
         SampleScene() : Scene() {
-            instantiate(std::make_shared<FallingBlock>(5.0f, 0.0f));
+            instantiate(std::make_shared<FallingBlock>(5.0f, 5.0f));
         }
 };
 
