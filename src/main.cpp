@@ -9,8 +9,12 @@ void setup() {
 }
 
 void loop() {
-    smash::Diagnostics::print("Smash game lifetime has been terminated.");
-    smash::Diagnostics::print("Press reset button on you ESP32 to restart the game.");
+    if (!Serial)
+    {
+        Serial.begin(115200);
+    }
+    Serial.println("Smash game lifetime has been terminated.");
+    Serial.println("Press reset button on you ESP32 to restart the game.");
     delay(3000);
 }
 #endif

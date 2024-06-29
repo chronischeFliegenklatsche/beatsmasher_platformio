@@ -4,8 +4,8 @@
 
 class GameRuntime : public smash::Runtime {
 public:
-    GameRuntime();
     void pipe() const override;
+    GameRuntime();
     ~GameRuntime() override;
 };
 
