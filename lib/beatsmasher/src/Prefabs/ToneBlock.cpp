@@ -2,6 +2,7 @@
 #define _TONE_BLOCK_CPP
 
 #include <smash.h>
+#include "Scripts/Move.cpp"
 
 class ToneBlock : public smash::GameObject
 {   
@@ -14,24 +15,29 @@ public:
         constexpr size_t width = 4;
         
         // Initialize transform
-        auto _transform = std::make_shared<smash::Transform>(vec2(xPosition, yPosition), vec2(width, height));
+        auto transform = std::make_shared<smash::Transform>(vec2(xPosition, yPosition), vec2(width, height));
 
-        // Initialize shader stack
-        auto _shaderStack= std::make_shared<smash::FragmentShaderPass>();
+        // Initialize move script
+        auto move = std::make_shared<Move>(1);
 
-        // Retrieving vertex pointers
-        auto& _posRef = _transform->getPositionRef();
-        auto& _scaleRef = _transform->getScaleRef();
-        
+        // Initialize shader renderer
+        auto shadRenderer = std::make_shared<smash::ShaderRenderer>();
+
+        // Initialize shader attributes
+        auto shattr = std::unique_ptr<smash::ShaderAttributes>(new smash::ShaderAttributes());
+        shattr->setPointer("m_Position", &(transform->getPositionRef()));
+        shattr->setPointer("m_Scale", &(transform->getScaleRef()));
+        shattr->setPointer("m_Color", (void*)m_Color);
+        shadRenderer->bindStartFrameShaderAttributes(std::move(shattr));
+
         // Initialize rect shader
-        auto _rectShader = std::unique_ptr<const smash::FragmentShader>(new smash::RectShader(&_posRef.x, &_posRef.y, &_scaleRef.x, &_scaleRef.y, m_Color));
-
-        // Add rect shader to stack
-        _shaderStack->bind(std::move(_rectShader));
+        auto _rectShader = std::unique_ptr<smash::Shader>(new smash::RectShader());
+        shadRenderer->bind(std::move(_rectShader));
 
         // Add components
-        addComponent(_transform);
-        addComponent(_shaderStack);
+        addComponent(transform);
+        addComponent(shadRenderer);
+        addComponent(move); 
     }
 
     ~ToneBlock() override
