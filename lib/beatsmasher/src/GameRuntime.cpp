@@ -20,17 +20,17 @@
 
 GameRuntime::GameRuntime() : smash::Runtime() {
     // Set up game data and scene management
-    std::shared_ptr<smash::Scene> mainScene = std::make_shared<SampleScene>(); // replace nullptr with initial scene
+    std::shared_ptr<smash::Scene> mainScene = std::static_pointer_cast<smash::Scene>(std::make_shared<SampleScene>()); // replace nullptr with initial scene
     
     if (mainScene)
     {
         smash::SceneManagement::addScene(mainScene);
-        smash::SceneManagement::setActiveScene(mainScene);
+        smash::SceneManagement::setActiveScene(mainScene.get());
     }
     
     // Set up input API
     std::shared_ptr<smash::InputAPI> inputAPI;
-#ifdef ARDUINO
+#ifdef ESP32
     inputAPI = std::make_shared<smash::ArduinoInputAPI>();
 #endif
 #ifdef _WIN32
@@ -43,7 +43,7 @@ GameRuntime::GameRuntime() : smash::Runtime() {
 
     // Set up rendering API
     std::shared_ptr<smash::RenderingAPI> renderingAPI;
-#ifdef ARDUINO
+#ifdef ESP32
     // Configure matrix
     HUB75_I2S_CFG::i2s_pins _pins = {
         R1_PIN, G1_PIN, B1_PIN, R2_PIN, G2_PIN, B2_PIN,
@@ -74,4 +74,10 @@ void GameRuntime::pipe() const {
 
 GameRuntime::~GameRuntime() {
     // Cleanup if necessary
+}
+
+void _SMASH_GAME_LIFETIME()
+{
+    GameRuntime gameRuntime;
+    _SMASH_ENGINE_LOOP(gameRuntime);
 }

@@ -4,7 +4,6 @@
 #ifdef _WIN32
 int main()
 {
-    GameRuntime gameRuntime;
-    _SMASH_ENGINE_LOOP(gameRuntime);
+    _SMASH_GAME_LIFETIME();
 }
 #endif

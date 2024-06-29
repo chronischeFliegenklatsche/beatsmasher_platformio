@@ -9,4 +9,6 @@ public:
     ~GameRuntime() override;
 };
 
+void _SMASH_GAME_LIFETIME();
+
 #endif
