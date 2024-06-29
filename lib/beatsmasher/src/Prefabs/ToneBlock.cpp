@@ -3,6 +3,10 @@
 
 #include <smash.h>
 #include "Scripts/Move.cpp"
+#include "Shaders/Glitter.cpp"
+#include "Shaders/RainbowMadness.cpp"
+#include "Shaders/PulseColor.cpp"
+#include "Shaders/PulsatingIntensity.cpp"
 
 class ToneBlock : public smash::GameObject
 {   
@@ -15,7 +19,7 @@ public:
         constexpr size_t width = 4;
         
         // Initialize transform
-        auto transform = std::make_shared<smash::Transform>(vec2(xPosition, yPosition), vec2(width, height));
+        auto transform = std::make_shared<smash::Transform>(vec2(xPosition, yPosition), vec2(height, width));
 
         // Initialize move script
         auto move = std::make_shared<Move>(1);
@@ -31,8 +35,12 @@ public:
         shadRenderer->bindStartFrameShaderAttributes(std::move(shattr));
 
         // Initialize rect shader
-        auto _rectShader = std::unique_ptr<smash::Shader>(new smash::RectShader());
+        auto _rectShader = std::unique_ptr<smash::Shader>(new RainbowMadness());
         shadRenderer->bind(std::move(_rectShader));
+
+        // Initialize glitter shader
+        auto _glitter = std::unique_ptr<smash::Shader>(new PulsatingIntensity());
+        shadRenderer->bind(std::move(_glitter));
 
         // Add components
         addComponent(transform);

@@ -9,7 +9,7 @@ class SampleScene : public smash::Scene
 public:
     SampleScene() : Scene()
     {
-        instantiate(std::make_shared<ToneBlock>(0, 0, 8));
+        instantiate(std::make_shared<ToneBlock>(0, 0, 24));
     }
 };
 
