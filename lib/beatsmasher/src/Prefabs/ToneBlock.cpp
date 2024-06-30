@@ -2,11 +2,12 @@
 #define _TONE_BLOCK_CPP
 
 #include <smash.h>
-#include "Scripts/Move.cpp"
-#include "Shaders/Glitter.cpp"
-#include "Shaders/RainbowMadness.cpp"
-#include "Shaders/PulseColor.cpp"
-#include "Shaders/PulsatingIntensity.cpp"
+#include "../Scripts/Move.cpp"
+#include "../Shaders/Glitter.cpp"
+#include "../Shaders/RainbowMadness.cpp"
+#include "../Shaders/PulseColor.cpp"
+#include "../Shaders/PulsatingIntensity.cpp"
+#include "../Scripts/Move.cpp"
 
 class ToneBlock : public smash::GameObject
 {   

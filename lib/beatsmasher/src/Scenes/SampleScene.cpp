@@ -2,7 +2,7 @@
 #define _SAMPLE_SCENE_CPP
 
 #include <smash.h>
-#include "Prefabs/ToneBlock.cpp"
+#include "../Prefabs/ToneBlock.cpp"
 
 class SampleScene : public smash::Scene
 {
